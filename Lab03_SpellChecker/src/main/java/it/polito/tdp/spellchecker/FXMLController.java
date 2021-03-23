@@ -89,12 +89,26 @@ public class FXMLController {
     	
     	String paroleSbagliate="";
     	int count=0;
-    	for(RichWord rw:this.model.spellCheckTest(listaInput)) {
+    	/*for(RichWord rw:this.model.spellCheckTest(listaInput)) {
     		if(!rw.isCorretta()) {
     			paroleSbagliate+=rw.getParola()+"\n";
     			count++;
     		}
-    	}
+    	}*/ //list.contains
+    	
+    	for(RichWord rw:this.model.spellCheckTestLinear(listaInput)) {
+    		if(!rw.isCorretta()) {
+    			paroleSbagliate+=rw.getParola()+"\n";
+    			count++;
+    		}
+    	} //ricerca lineare
+    	
+    	/*for(RichWord rw:this.model.spellCheckTestDichotomic(listaInput)) {
+    		if(!rw.isCorretta()) {
+    			paroleSbagliate+=rw.getParola()+"\n";
+    			count++;
+    		}
+    	}*/ //ricerca dicotomica
     	
     	this.labelSpellCheck.setText("");
     	txtInput.setEditable(false);

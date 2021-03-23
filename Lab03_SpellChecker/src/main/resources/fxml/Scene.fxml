@@ -41,7 +41,7 @@
             <HBox alignment="CENTER_RIGHT">
                <children>
                   <Label fx:id="labelSpellCheck" textFill="RED" />
-                  <Button fx:id="bttnCheck" alignment="CENTER_RIGHT" disable="true" mnemonicParsing="false" onAction="#doSpellCheck" text="Spell Check">
+                  <Button fx:id="bttnCheck" alignment="CENTER_RIGHT" defaultButton="true" disable="true" mnemonicParsing="false" onAction="#doSpellCheck" text="Spell Check">
                      <HBox.margin>
                         <Insets left="10.0" />
                      </HBox.margin>
