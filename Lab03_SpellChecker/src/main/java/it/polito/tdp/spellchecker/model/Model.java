@@ -13,7 +13,7 @@ public class Model {
 	private List<String> dizionario;
 	
 	public Model() {
-		dizionario= new LinkedList<String>();//new ArrayList<String>();
+		dizionario=new ArrayList<String>(); //new LinkedList<String>();
 	}
 	
 	public void loadDictionary(String language) {
@@ -67,15 +67,23 @@ public class Model {
 		List<RichWord> paroleControllate=new ArrayList<RichWord>(inputTesto.size());
 		for(String s1:inputTesto) {
 			RichWord nuovaParola=new RichWord(s1);
-			for(int i=((int)dizionario.size()/2);i>0&&i<=dizionario.size();) {
-				if(s1.compareTo(dizionario.get(i))==0) {
+			int max=dizionario.size()-1;
+			int min=0;
+			for(int i=(int)(dizionario.size()/2);max-min>1;) {
+				if(s1.compareToIgnoreCase(dizionario.get(i))==0) {
 					nuovaParola.setCorretta();
 					break;
-				}else if(s1.compareTo(dizionario.get(i))<0) {
-					i=(int) i/2;
-				}else {
-					i+=(int)i/2;
+				}else if(s1.compareToIgnoreCase(dizionario.get(i))<0) {
+					max=i;
+				}else if(s1.compareToIgnoreCase(dizionario.get(i))>0){
+					min=i;
+				}else if(max-min==2) {
+					if(s1.equals(dizionario.get(min))||s1.equals(dizionario.get(max))) {
+						nuovaParola.setCorretta();
+					}
+					break;
 				}
+				i=(int)((max+min)/2);
 			}
 			paroleControllate.add(nuovaParola);
 		}

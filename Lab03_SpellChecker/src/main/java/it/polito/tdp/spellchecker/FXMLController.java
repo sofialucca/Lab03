@@ -56,13 +56,16 @@ public class FXMLController {
     
     @FXML
     void sceltaLingua(ActionEvent event) {
-    	this.bttnCheck.setDisable(false);
-    	this.txtInput.setEditable(true);
-    	model.loadDictionary(this.choiceLingua.getValue());
+    	if(!choiceLingua.getValue().isBlank()) {
+    		this.bttnCheck.setDisable(false);
+	    	this.txtInput.setEditable(true);
+	    	model.loadDictionary(this.choiceLingua.getValue());
+    	}
     }
     
     @FXML
     void doClear(ActionEvent event) {
+    	this.choiceLingua.setValue("");
     	this.choiceLingua.setDisable(false);
     	this.txtInput.clear();
     	this.txtInput.setEditable(false);
@@ -84,7 +87,7 @@ public class FXMLController {
     	String inputSoloParole= this.txtInput.getText().replaceAll("[.,\\/#!$%\\^&\\*;:{}=\\-_`~()\\[\\]\"]", "").toLowerCase();
     	List<String> listaInput=new ArrayList<String>();
     	for(String s:inputSoloParole.split(" ")) {
-    		listaInput.add(s);
+    			listaInput.add(s);
     	}
     	
     	String paroleSbagliate="";
@@ -94,21 +97,21 @@ public class FXMLController {
     			paroleSbagliate+=rw.getParola()+"\n";
     			count++;
     		}
-    	}*/ //list.contains
+    	} //list.contains
     	
     	for(RichWord rw:this.model.spellCheckTestLinear(listaInput)) {
     		if(!rw.isCorretta()) {
     			paroleSbagliate+=rw.getParola()+"\n";
     			count++;
     		}
-    	} //ricerca lineare
+    	}*///ricerca lineare
     	
-    	/*for(RichWord rw:this.model.spellCheckTestDichotomic(listaInput)) {
+    	for(RichWord rw:this.model.spellCheckTestDichotomic(listaInput)) {
     		if(!rw.isCorretta()) {
     			paroleSbagliate+=rw.getParola()+"\n";
     			count++;
     		}
-    	}*/ //ricerca dicotomica
+    	} //ricerca dicotomica
     	
     	this.labelSpellCheck.setText("");
     	txtInput.setEditable(false);
